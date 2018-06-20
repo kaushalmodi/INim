@@ -130,10 +130,13 @@ proc init(preload: string = nil) =
         cleanExit()
 
 proc getPromptSymbol(): string =
+    result = ansiStyleCode(fgBlack.int)
+    result &= ansiStyleCode(styleBright.int)
     if indentLevel == 0:
-        result = ">>> "
+        result &= ">>> "
     else:
-        result =  "... "
+        result &=  "... "
+    result &= ansiStyleCode(resetStyle.int)
     # Auto-indent (multi-level)
     result &= indentSpaces.repeat(indentLevel)
 
