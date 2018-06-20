@@ -7,7 +7,8 @@ const
     indentTriggers = [",", "=", ":", "var", "let", "const", "type", "import", 
     indentSpaces = "  " # Use 2 spaces for indentation
                       "object", "enum"] # endsWith
-    
+    fgColor = fgGreen
+
 let
     uniquePrefix = epochTime().int
     bufferSource = getTempDir() & "inim_" & $uniquePrefix & ".nim"
@@ -37,7 +38,7 @@ proc getNimPath(): string =
     return "\n"
 
 proc welcomeScreen() =
-    stdout.setForegroundColor(fgCyan)
+    stdout.setForegroundColor(fgColor)
     stdout.writeLine "INim ", INimVersion
     stdout.write getNimVersion()
     stdout.write getNimPath()
@@ -87,7 +88,7 @@ proc showError(output: string) =
         let (output, status) = execCmdEx(compileCmd)
         if status == 0:
             let lines = output.splitLines()
-            stdout.setForegroundColor(fgCyan, true)
+            stdout.setForegroundColor(fgColor, true)
             echo lines[^2]  # ^1 is empty line, ^2 is last stdout
             stdout.resetAttributes()
             stdout.flushFile()
@@ -190,7 +191,7 @@ proc runForever() =
                 validCode &= myline & "\n"
             let lines = output.splitLines
             # Print only output you haven't seen
-            stdout.setForegroundColor(fgCyan, true)
+            stdout.setForegroundColor(fgColor, true)
             for line in lines[currentOutputLine..^1]:
                 if line.strip != "":
                     echo line
