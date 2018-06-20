@@ -4,8 +4,8 @@ import os, osproc, rdstdin, strutils, terminal, times
 
 const
     INimVersion = "0.2.5"
-    indentSpaces = "    "
     indentTriggers = [",", "=", ":", "var", "let", "const", "type", "import", 
+    indentSpaces = "  " # Use 2 spaces for indentation
                       "object", "enum"] # endsWith
     
 let
